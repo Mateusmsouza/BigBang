@@ -1,0 +1,16 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: 'Check Studio Code is installed'
+    ansible.builtin.stat:
+      path: '/usr/bin/code'
+    register: vscode_installed
+
+  - name: 'Assert Visual Studio Code is installed'
+    ansible.builtin.assert:
+      that:
+        vscode_installed.stat.exists
